@@ -1,0 +1,21 @@
+---
+interface Props {
+  phrase: string
+  className: string
+}
+const { phrase, className } = Astro.props
+const words = phrase.split(' ')
+---
+
+{
+  words.map((word, i, arr) => {
+    const output = Array.from(word)
+    return (
+      <span class="inline-block">
+        {output.map(letter => (
+          <span class:list={['inline-block', className]}>{letter}</span>
+        ))}
+      </span>
+    )
+  })
+}

@@ -1,0 +1,47 @@
+---
+import { IconCheck } from '@/assets'
+---
+
+<section class="mt-12 md:mt-72">
+  <div class="max-w-screen-lg mx-auto">
+    <div class="grid gap-8 xl:max-w-none lg:grid-cols-2 px-8">
+      <div>
+        <p class="text-lg">
+          Bienvenido un sitio web dedicado a ayudar a los desarrolladores a aprender y dominar JavaScript a través de proyectos prácticos. Nuestro objetivo es
+          brindarte las herramientas y los recursos que necesitas para mejorar tus habilidades y crear proyectos reales que demuestren tu experiencia.
+        </p>
+        <p class="my-4 text-lg">Aqui podrás encontrar:</p>
+        <ul class="mb-6 flex flex-col gap-2 [&>*]:flex [&>*]:items-center [&>*]:gap-2">
+          <li><span><IconCheck size={24} /></span>Manejo de drag and drop</li>
+          <li><span><IconCheck size={24} /></span>Manipulación del DOM</li>
+          <li><span><IconCheck size={24} /></span>Manejo de Eventos</li>
+          <li><span><IconCheck size={24} /></span>AJAX y Fetching de Datos</li>
+          <li><span><IconCheck size={24} /></span>Programación Orientada a Objetos</li>
+        </ul>
+        <span>y muchos temas más...</span>
+      </div>
+      <div class="relative">
+        <figure class="relative isolate hidden w-full aspect-square max-w-[290px] mx-auto sm:block">
+          <div class="bg-pinia-400 absolute inset-0 rounded-full -z-10 opacity-50 scale-y-[.5] -rotate-45 blur-[200px]"></div>
+          <img src="/images/shared/jsking.webp" alt="icono de un cubo de javascript en 3D" />
+        </figure>
+        <div
+          class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:block xl:static xl:translate-x-0 xl:-translate-y-20 [&>*]:p-4 [&>*]:w-max [&>*]:rounded-lg"
+        >
+          <!-- <CodeShowcase /> -->
+          <div class="mt-4 text-lg leading-6 text-yellow-100 bg-neutral-800 p-4 rounded-md" style="font-family: 'Courier New', monospace;">
+            <p><span class="text-blue-400">const</span> <span class="text-green-400">developer</span> = {'{'}</p>
+            <p class="ml-4">
+              <span class="text-purple-400">skills:</span> [<span class="text-orange-400">'JavaScript'</span>, <span class="text-orange-400">'React'</span>, <span
+                class="text-orange-400">'Node.js'</span
+              >],
+            </p>
+            <p class="ml-4"><span class="text-purple-400">level:</span> <span class="text-orange-400">'Advancing'</span>,</p>
+            <p class="ml-4"><span class="text-purple-400">goal:</span> <span class="text-orange-400">'Mastery'</span></p>
+            <p>{'}'}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

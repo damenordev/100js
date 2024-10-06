@@ -1,0 +1,6 @@
+export { default as HomeAbout } from './HomeAbout.astro'
+export { default as HomeBannerSubscribe } from './HomeBannerSubscribe.astro'
+export { default as HomeHero } from './HomeHero.astro'
+export { default as HomeListOfTecnologies } from './HomeListOfTecnologies.astro'
+export { default as HomeProjectCard } from './HomeProjectCard.astro'
+export { default as HomeProjects } from './HomeProjects.astro'

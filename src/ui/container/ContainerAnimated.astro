@@ -1,0 +1,15 @@
+---
+interface Props {
+  className?: string
+  classNameContent?: string
+  direction?: 'left' | 'right'
+}
+
+const { className, classNameContent, direction = 'left' } = Astro.props
+---
+
+<div class:list={['flex [mask-image:linear-gradient(to_right,transparent,black_10%,red_90%,transparent)]', className]}>
+  <div class:list={['flex flex-none gap-4 md:gap-12 pr-4 py-3', direction === 'left' ? 'animate-move-left' : 'animate-move-right', classNameContent]}>
+    <slot />
+  </div>
+</div>

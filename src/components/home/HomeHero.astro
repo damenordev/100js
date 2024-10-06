@@ -1,0 +1,80 @@
+---
+import { IconCrown, IconGithub, IconJS } from '@/assets'
+import { ButtonGradient, ButtonStar, ContainerAnimated, Spanify, ScrollDownAnimated } from '@/ui'
+---
+
+<!-- <section class="relative  min-[2000px]:pb-56"> -->
+<section class="relative h-screen flex flex-col justify-center">
+  <div class="pattern absolute inset-0 -z-0 -translate-y-1/4"></div>
+  <div class="flex-1 flex flex-col justify-center gap-8">
+    <div class="flex flex-col items-center">
+      <div class="relative w-20 aspect-square mx-auto mb-16 md:w-28">
+        <IconJS class="js absolute translate-y-1 translate-x-1 hue-rotate-[20deg]" />
+        <IconJS class="js absolute translate-y-2 translate-x-2 hue-rotate-[10deg]" />
+        <IconJS class="js absolute" />
+        <IconCrown class="crown absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[3rem] w-full max-w-[5rem]" />
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-8xl text-center text-balance max-w-lg lg:max-w-4xl mx-auto -mt-12">
+        <Spanify phrase="100" className="title leading-none" />
+        <Spanify phrase="Proyectos" className="title leading-none" />
+        <Spanify phrase="en" className="title leading-none" />
+        <Spanify phrase="JavaScript" className="title leading-none title-javascript javascript font-bold" />
+      </h1>
+    </div>
+    <p class="subtitle container font-semibold text-center text-balance text-2xl text-neutral-500 max-w-[55rem] mx-auto">
+      Descubre una amplia y diversa gama de proyectos 🚀, desarrollados con diversas tecnologías adicionales sin olvidar la potencia de JS 💻✨
+    </p>
+    <div class="flex justify-center items-center mt-8">
+      <ScrollDownAnimated />
+    </div>
+  </div>
+  <ContainerAnimated className="bg-gradient-to-t bg-pinia-400" classNameContent="gap-0 md:gap-0">
+    {
+      Array.from({ length: 20 }).map((_, index) => (
+        <div class="flex items-center gap-4 px-2">
+          <p class="uppercase text-xl lg:text-2xl font-bold text-neutral-950">Completados 5/100</p>
+          <IconJS class="grayscale size-6" />
+        </div>
+      ))
+    }
+  </ContainerAnimated>
+</section>
+
+<script>
+  import gsap from 'gsap'
+
+  const timeline = gsap.timeline()
+  timeline.from('.title', { rotateX: 360, scale: 0.5, opacity: 0, stagger: 0.025 })
+  timeline.to('.title', { y: 0, duration: 0.1, stagger: 0.05 }, '<20%')
+  timeline.from('.subtitle', { opacity: 0, scale: 0.9, y: 20, duration: 0.25 })
+  timeline.from('.icon', { y: -100, opacity: 0, duration: 0.25 })
+
+  timeline.from('.js', { x: '+=100', y: '-=600', scale: 0, rotateZ: '180deg', stagger: 0.05 }, 0)
+  timeline.from('.crown', { y: '-=35', scale: 1.1, duration: 0.05, opacity: 0 })
+  timeline.to('.js', { y: '+=5', repeat: 1, yoyo: true, duration: 0.05, ease: 'none' })
+  timeline.from('.title-javascript', { color: 'rgba(255, 255, 0, 0.25)', textShadow: 'rgba(255, 255, 0, 0) 0 0 0', duration: 0.05 })
+
+  timeline.play()
+
+  gsap.from('.javascript', { rotateZ: '-4deg', repeat: -1, yoyo: true, ease: 'power1.inOut' })
+</script>
+
+<style is:global>
+  .title-javascript {
+    font-family: 'Spicy Rice', cursive;
+    text-shadow: rgba(255, 255, 0, 0.5) 0 0 20px;
+    color: #ffee00;
+  }
+
+  .pattern {
+    --line-color: rgba(255, 230, 0, 0.1);
+    --size: 12px;
+
+    background-image: radial-gradient(transparent 30%, rgb(10, 10, 10) 70%), linear-gradient(90deg, transparent 90%, var(--line-color) 90%),
+      linear-gradient(0deg, var(--line-color) 10%, transparent 10%);
+    background-size:
+      auto auto,
+      var(--size) var(--size),
+      var(--size) var(--size);
+  }
+</style>

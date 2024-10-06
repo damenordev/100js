@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  className?: string
+}
+
+const { className, ...props } = Astro.props as Props
+
+const backgroundImage = '/images/shared/grain.jpg'
+---
+
+<div
+  class:list={[
+    'bg-zinc-900 rounded-3xl z-0 relative overflow-hidden after:contet-[""] after:absolute after:z-10 after:inset-0 after:outline-2 after:outline after:-outline-offset-2 after:rounded-3xl after:outline-white/20 after:pointer-events-none',
+    className,
+  ]}
+  {...props}
+>
+  <div class="absolute inset-0 -z-10 opacity-10" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+  <slot />
+</div>

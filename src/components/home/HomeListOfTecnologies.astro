@@ -1,0 +1,29 @@
+---
+import { IconAstro, IconCSS, IconHTML, IconJS, IconTailwind, IconTypescript } from '@/assets'
+import { ContainerAnimated, SectionBigTitle } from '@/ui'
+
+const TECNOLOGIES = ['Tailwind', 'Astro', 'Typescript', 'HTML', 'Javascript', 'CSS']
+---
+
+<SectionBigTitle title="Tecnologías" class="mt-32 md:mt-80 xl:mt-96 2xl:mt-[40vh]">
+  <ContainerAnimated>
+    {
+      [
+        ...new Array(2).fill(0).map(() => (
+          <Fragment>
+            {TECNOLOGIES.map(tecnology => (
+              <div class="flex flex-col items-center justify-center gap-1">
+                {tecnology === 'HTML' && <IconHTML class="size-16 md:size-40 xl:size-64" />}
+                {tecnology === 'Astro' && <IconAstro class="size-16 md:size-40 xl:size-64" />}
+                {tecnology === 'Javascript' && <IconJS class="size-16 md:size-40 xl:size-64" />}
+                {tecnology === 'CSS' && <IconCSS class="size-16 md:size-40 xl:size-64" />}
+                {tecnology === 'Tailwind' && <IconTailwind class="size-16 md:size-40 xl:size-64" />}
+                {tecnology === 'Typescript' && <IconTypescript class="size-16 md:size-40 xl:size-64" />}
+              </div>
+            ))}
+          </Fragment>
+        )),
+      ]
+    }
+  </ContainerAnimated>
+</SectionBigTitle>

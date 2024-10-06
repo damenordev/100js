@@ -1,0 +1,37 @@
+---
+import { IconLink } from '@/assets'
+
+interface Props {
+  className?: string
+  classNameContent?: string
+  title?: string
+  href?: string
+}
+
+const { className, classNameContent, title, href } = Astro.props
+---
+
+<div class:list={['bg-neutral-900 w-full rounded-xl', className]}>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2 p-4">
+      <span class="inline-block items-center size-3 rounded-full bg-red-500"></span>
+      <span class="inline-block items-center size-3 rounded-full bg-yellow-500"></span>
+      <span class="inline-block items-center size-3 rounded-full bg-green-500"></span>
+    </div>
+    <div>
+      <span class="text-neutral-50 text-lg font-bold">{title}</span>
+    </div>
+    <div class="flex items-center gap-2 p-4">
+      {
+        href && (
+          <a href={href} class="text-neutral-500 hover:text-neutral-400 cursor-pointer">
+            <IconLink size={24} />
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <div class={classNameContent}>
+    <slot />
+  </div>
+</div>
