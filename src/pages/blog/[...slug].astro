@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content'
-
 import { Layout } from '@/layouts'
 import { readingTime } from '@/utils'
 import { ButtonStar } from '@/ui'
@@ -12,62 +11,57 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>
 
 const post = Astro.props
-const { Content, headings } = await post.render()
+const { Content } = await post.render()
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <main class="bg-neutral-950 px-8 py-20">
-    <img class="container mx-auto w-full h-[40vh] object-cover rounded-3xl" src="/images/arkanoid/screenshot.png" alt={post.data.title} />
-    <section class="container max-w-screen-xl mx-auto py-16">
-      <div class="flex flex-col items-center gap-3 mt-12 mb-24">
-        <h1 class="blog-title text-6xl text-pinia-300 text-center px-20">
-          {post.data.title}
-        </h1>
-        <div class="flex items-center gap-1 text-xs text-neutral-400">
-          <div>
-            <time datetime={post.data.createdAt.toISOString()}>
-              {post.data.createdAt.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </time>
-          </div>
-          &bull;
-          <div>
-            Lectura: {readingTime(post.body)}
-          </div>
-        </div>
-        <a class="mx-auto mt-8" href={`/projects/${post.slug}`}>
-          <ButtonStar>Probar demo</ButtonStar>
+  <header class="bg-black border-b border-yellow-400/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <nav class="flex items-center justify-between">
+        <!-- <a href="/" class="text-yellow-400 text-2xl font-bold">
+          <span class="sr-only">100 Proyectos JS</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 630" class="w-10 h-10">
+            <rect width="630" height="630" fill="#f7df1e"></rect>
+            <path
+              d="m423.2 492.19c12.69 20.72 29.2 35.95 58.4 35.95 24.53 0 40.2-12.26 40.2-29.2 0-20.3-16.1-27.49-43.1-39.3l-14.8-6.35c-42.72-18.2-71.1-41-71.1-89.2 0-44.4 33.83-78.2 86.7-78.2 37.64 0 64.7 13.1 84.2 47.4l-46.1 29.6c-10.15-18.2-21.1-25.37-38.1-25.37-17.34 0-28.33 11-28.33 25.37 0 17.76 11 24.95 36.4 35.95l14.8 6.34c50.3 21.57 78.7 43.56 78.7 93 0 53.3-41.87 82.5-98.1 82.5-54.98 0-90.5-26.2-107.88-60.54zm-209.13 5.13c9.3 16.5 17.76 30.45 38.1 30.45 19.45 0 31.72-7.61 31.72-37.2v-201.3h59.2v202.1c0 61.3-35.94 89.2-88.4 89.2-47.4 0-74.85-24.53-88.81-54.075z"
+            ></path>
+          </svg>
+        </a> -->
+        <a href="/" class="text-yellow-400 hover:text-yellow-300 transition-colors">
+          <span class="sr-only">Volver a proyectos</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="bg-black text-white min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-yellow-400">
+        {post.data.title}
+      </h1>
+
+      <div class="flex items-center gap-4 text-sm text-gray-400 mb-8">
+        <time datetime={post.data.createdAt.toISOString()}>
+          {post.data.createdAt.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        <span>&bull;</span>
+        <span>{readingTime(post.body)} de lectura</span>
+      </div>
+
+      <img src={post.data.image} alt={post.data.title} class="w-full h-64 object-cover rounded-lg shadow-lg mb-12" />
+
+      <div class="flex justify-center mb-12">
+        <a href={`/projects/${post.slug}`} class="inline-block">
+          <ButtonStar client:load>Probar demo</ButtonStar>
         </a>
       </div>
-      <div class="relative flex clear-both">
-        <article
-          class="max-w-screen-md mx-auto prose prose-invert prose-img:mx-auto prose-img:my-auto prose-headings:text-secondary prose-headings:font-semibold prose-h3:text-secondary"
-        >
-          <Content />
-        </article>
-        <!-- <div class="sticky top-4 w-[20rem] h-fit flex flex-col gap-2 bg-neutral-900 p-8 rounded-xl text-neutral-400">
-          <ul class="flex flex-col gap-2 px-4 mb-8">
-            {
-              headings.length &&
-                headings.map(heading => (
-                  <li class="list-disc hover:text-pinia-300">
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                  </li>
-                ))
-            }
-          </ul>
-          <a class="mx-auto" href={`/projects/${post.slug}`}>
-            <ButtonStar>Probar demo</ButtonStar>
-          </a>
-        </div> -->
-      </div>
-    </section>
+
+      <article class="prose prose-invert prose-yellow max-w-none">
+        <Content />
+      </article>
+    </div>
   </main>
 </Layout>
-
-<style>
-  .blog-title {
-    font-family: 'Spicy Rice', cursive;
-    text-shadow: rgba(255, 255, 0, 0.5) 0 0 20px;
-    color: #ffee00;
-  }
-</style>
