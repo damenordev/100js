@@ -1,0 +1,72 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+import { Layout } from '@/layouts'
+import { readingTime } from '@/utils'
+import { ButtonStar } from '@/ui'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map(post => ({ params: { slug: post.slug }, props: post }))
+}
+type Props = CollectionEntry<'blog'>
+
+const post = Astro.props
+const { Content, headings } = await post.render()
+
+console.log({ post, headings })
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <main class="bg-neutral-950 px-8 py-20">
+    <img class="container mx-auto w-full h-[40vh] object-cover rounded-3xl" src="/images/arkanoid/screenshot.png" alt={post.data.title} />
+    <section class="container max-w-screen-xl mx-auto py-16">
+      <div class="flex flex-col items-center gap-3 mt-12 mb-24">
+        <h1 class="blog-title text-6xl text-pinia-300 text-center px-20">
+          {post.data.title}
+        </h1>
+        <div class="flex items-center gap-1 text-xs text-neutral-400">
+          <div>
+            <time datetime={post.data.createdAt.toISOString()}>
+              {post.data.createdAt.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+          </div>
+          &bull;
+          <div>
+            Lectura: {readingTime(post.body)}
+          </div>
+        </div>
+      </div>
+      <div class="relative flex clear-both">
+        <article
+          class="max-w-screen-md mx-auto prose prose-invert prose-img:mx-auto prose-img:my-auto prose-headings:text-secondary prose-headings:font-semibold prose-h3:text-secondary"
+        >
+          <Content />
+        </article>
+        <div class="sticky top-4 w-[20rem] h-fit flex flex-col gap-2 bg-neutral-900 p-8 rounded-xl text-neutral-400">
+          <ul class="flex flex-col gap-2 px-4 mb-8">
+            {
+              headings.length &&
+                headings.map(heading => (
+                  <li class="list-disc hover:text-pinia-300">
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))
+            }
+          </ul>
+          <a class="mx-auto" href={`/projects/${post.slug}`}>
+            <ButtonStar>Probar demo</ButtonStar>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-title {
+    font-family: 'Spicy Rice', cursive;
+    text-shadow: rgba(255, 255, 0, 0.5) 0 0 20px;
+    color: #ffee00;
+  }
+</style>

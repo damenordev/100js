@@ -24,8 +24,10 @@ const { title = '100 proyectos JS', description = '', lang = 'es' } = Astro.prop
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
   </head>
-  <body>
-    <slot />
+  <body class="min-h-screen bg-neutral-950 text-neutral-50 flex flex-col">
+    <main class="flex-1 animate-fade-in">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

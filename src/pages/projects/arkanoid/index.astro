@@ -1,0 +1,37 @@
+---
+import { Layout } from '@/layouts'
+---
+
+<Layout title="100 proyectos JS - Arkanoid">
+  <div>
+    <a class="text-neutral-500 hover:text-neutral-50" href="/">Volver al inicio</a>
+  </div>
+  <div class="container mx-auto flex flex-col items-center gap-4 animate-fade-in">
+    <canvas></canvas>
+    <button id="start" class="bg-emerald-400 text-neutral-950 px-4 py-2 rounded-md">¡Empezar!</button>
+  </div>
+  <img hidden id="sprite" src="/images/arkanoid/sprite.png" alt="Sprite Arkanoid" />
+  <img hidden id="bricks" src="/images/arkanoid/bricks.png" alt="Sprite Bricks Arkanoid" />
+</Layout>
+<style>
+  canvas {
+    border: 4px solid #000;
+    border-bottom: transparent;
+    background: url('/images/arkanoid/bkg.png') repeat;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+  }
+</style>
+
+<script>
+  import { Arkanoid } from './Arkanoid'
+
+  const canvas = document.querySelector('canvas')!
+  const sprite = document.querySelector('#sprite') as HTMLImageElement
+  const bricksImage = document.querySelector('#bricks') as HTMLImageElement
+  canvas.width = 448
+  canvas.height = 400
+
+  const game = new Arkanoid(canvas, sprite, bricksImage)
+</script>

@@ -10,11 +10,16 @@ export default {
         }
       },
       animation: {
+        'fade-in': 'fade-in 1s forwards',
         'fade-in-up': 'fade-in-up 1s forwards',
         'move-left': 'move-left 30s linear infinite',
         'move-right': 'move-right 30s linear infinite',
       },
       keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         'fade-in-up': {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -30,5 +35,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

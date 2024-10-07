@@ -2,22 +2,26 @@
 import { Layout } from '@/layouts'
 ---
 
-<Layout title="100 proyectos JS - Api Geo IP">
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+<Layout title="Api Geo IP - 100 JS">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" /> -->
 
-  <main class="container">
-    <form id="form">
-      <label>
+  <main class="max-w-2xl mx-auto py-20">
+    <h2 class="text-4xl font-bold">Api Geo IP</h2>
+    <p class="text-neutral-400">Localiza la IP de un usuario y obtén información sobre su ubicación.</p>
+    <form id="form" class="flex flex-col gap-4 mt-8">
+      <label class="flex flex-col gap-2">
         IP del usuario
-        <input required id="input" type="text" placeholder="Introduce aquí la IP" />
-        <small>Por ejemplo: 54.85.132.205</small>
+        <input class="bg-neutral-800 text-white rounded-md p-2" required id="input" type="text" placeholder="Introduce aquí la IP" />
+        <small class="text-neutral-400">Por ejemplo: 54.85.132.205</small>
       </label>
 
-      <button type="submit" id="submit"> Buscar información de esta IP </button>
+      <button class="bg-emerald-400 text-neutral-950 font-bold rounded-xl p-2 active:scale-[0.99] transition-transform" type="submit" id="submit">
+        Buscar información de esta IP
+      </button>
     </form>
 
-    <div>
-      <pre id="results"></pre>
+    <div class="mt-8">
+      <pre id="results" class="invisible bg-neutral-800 p-4 rounded-md"></pre>
     </div>
   </main>
 </Layout>
@@ -56,6 +60,7 @@ import { Layout } from '@/layouts'
 
     if (ipInfo) {
       $results.innerHTML = JSON.stringify(ipInfo, null, 2)
+      $results.classList.remove('invisible')
     }
 
     $submit.removeAttribute('disabled')

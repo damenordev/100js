@@ -13,12 +13,12 @@ const hrefBlog = `/blog/${slug}`
 <CardMac className="animate-fade-in-up" classNameContent="px-4 pb-4" title={name} href={hrefProject}>
   <div class="relative w-full h-full bg-neutral-800 p-8 rounded-b-lg overflow-hidden group">
     <img
-      class="w-full object-contain scale-[1.35] transition-transform duration-300 group-hover:scale-75 group-hover:opacity-10 group-hover:blur-[8px] group-hover:rotate-12"
+      class="w-full h-full aspect-video object-cover scale-[1.35] transition-transform duration-300 group-hover:scale-75 group-hover:opacity-10 group-hover:blur-[8px] group-hover:rotate-12"
       src={image}
       alt={name}
     />
     <div
-      class="absolute inset-0 flex flex-col items-center justify-between gap-4 p-4 opacity-0 group-hover:opacity-100 translate-y-20 group-hover:translate-y-0 transition-all duration-300"
+      class="absolute inset-0 flex flex-col items-center justify-between gap-4 p-4 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300"
     >
       <p class="text-neutral-50 text-sm md:text-lg text-center text-balance">
         {description}

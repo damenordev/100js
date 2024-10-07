@@ -39,12 +39,15 @@ const projects = ['Arkanoid', 'Tetris', 'Tiermaker']
       <form class="flex flex-col gap-4 w-full">
         <input
           type="email"
+          name="email"
           placeholder="Ingresa tu email"
+          value="test@email.com"
           class="w-full bg-neutral-800 border-1 border-neutral-700 rounded-md shadow px-6 py-3 inline-flex items-center justify-between text-lg font-bold text-neutral-100 hover:bg-neutral-700 transition-colors duration-300 group"
         />
         <button
+          id="subscribe"
           type="submit"
-          class="w-full bg-pinia-400/30 border-2 border-pinia-300 rounded-2xl shadow px-6 py-3 inline-flex items-center justify-between text-lg font-bold text-pinia-400 hover:text-neutral-900 hover:bg-pinia-400 transition-colors duration-300 group"
+          class="w-full bg-pinia-400/30 border-2 border-pinia-300 rounded-2xl shadow px-6 py-3 inline-flex items-center justify-between text-lg font-bold text-pinia-400 hover:text-neutral-900 hover:bg-pinia-400 transition-colors duration-300 group active:scale-[0.99]"
         >
           Suscríbete ahora
           <IconArrowRight size={24} class="group-hover:translate-x-2 transition-transform duration-300" />
@@ -53,3 +56,51 @@ const projects = ['Arkanoid', 'Tetris', 'Tiermaker']
     </div>
   </div>
 </div>
+
+<script>
+  import confetti from 'canvas-confetti'
+
+  const subscribeButton = document.querySelector('#subscribe') as HTMLButtonElement
+
+  let exploding = false
+
+  const defaults: confetti.Options = {
+    particleCount: 500,
+    spread: 360,
+    angle: 90,
+  }
+  const fireConfetti = (particleRatio: number, opts: confetti.Options) => {
+    const options = Object.assign({}, defaults, opts, {
+      particleCount: Math.floor((defaults.particleCount ?? 500) * particleRatio),
+      origin: {
+        x: subscribeButton.getBoundingClientRect().left / window.innerWidth + subscribeButton.getBoundingClientRect().width / window.innerWidth / 2,
+        y: subscribeButton.getBoundingClientRect().top / window.innerHeight + subscribeButton.getBoundingClientRect().height / window.innerHeight / 1.5,
+      },
+    })
+    confetti(options)
+  }
+
+  const handleOnSubmit = (e: Event) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.target as HTMLFormElement)
+    const email = formData.get('email')
+
+    if (!email) return
+
+    if (exploding) return
+    exploding = true
+    window.setTimeout(() => {
+      fireConfetti(0.25, { spread: 26, startVelocity: 55 })
+      fireConfetti(0.2, { spread: 60 })
+      fireConfetti(0.35, { spread: 100, decay: 0.91, scalar: 0.8 })
+      fireConfetti(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 })
+      fireConfetti(0.1, { spread: 120, startVelocity: 45 })
+      window.setTimeout(() => {
+        exploding = false
+      }, 300)
+    }, 300)
+  }
+
+  document.addEventListener('submit', handleOnSubmit)
+</script>
