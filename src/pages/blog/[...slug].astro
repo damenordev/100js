@@ -13,8 +13,6 @@ type Props = CollectionEntry<'blog'>
 
 const post = Astro.props
 const { Content, headings } = await post.render()
-
-console.log({ post, headings })
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
@@ -36,6 +34,9 @@ console.log({ post, headings })
             Lectura: {readingTime(post.body)}
           </div>
         </div>
+        <a class="mx-auto mt-8" href={`/projects/${post.slug}`}>
+          <ButtonStar>Probar demo</ButtonStar>
+        </a>
       </div>
       <div class="relative flex clear-both">
         <article
@@ -43,7 +44,7 @@ console.log({ post, headings })
         >
           <Content />
         </article>
-        <div class="sticky top-4 w-[20rem] h-fit flex flex-col gap-2 bg-neutral-900 p-8 rounded-xl text-neutral-400">
+        <!-- <div class="sticky top-4 w-[20rem] h-fit flex flex-col gap-2 bg-neutral-900 p-8 rounded-xl text-neutral-400">
           <ul class="flex flex-col gap-2 px-4 mb-8">
             {
               headings.length &&
@@ -57,7 +58,7 @@ console.log({ post, headings })
           <a class="mx-auto" href={`/projects/${post.slug}`}>
             <ButtonStar>Probar demo</ButtonStar>
           </a>
-        </div>
+        </div> -->
       </div>
     </section>
   </main>
